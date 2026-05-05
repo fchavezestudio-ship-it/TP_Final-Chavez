@@ -33,7 +33,7 @@ Aplicación web tipo blog desarrollada con Python/Django.
 
 ```bash
 git clone <repo-url>
-cd myblog
+cd TP_Final-Chavez
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py createsuperuser
