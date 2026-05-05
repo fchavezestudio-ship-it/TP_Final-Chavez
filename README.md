@@ -1,11 +1,11 @@
-# Mi Blog — Proyecto Final Django
+# Las peque noticias — Proyecto Final Django
 
 Aplicación web tipo blog desarrollada con Python/Django.
 
 ## Funcionalidades
 
-- **Home**: Página de inicio con posts recientes
-- **About**: Vista "Acerca de mí" en `/about/`
+- **Inicio**: Página de inicio con posts recientes
+- **Sobre mí**: Vista "Acerca de mí" en `/about/`
 - **Noticias**: 
   - Listado con búsqueda
   - Detalle de post con "Leer más"
