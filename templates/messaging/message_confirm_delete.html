@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Eliminar mensaje{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="form-card" style="text-align:center;padding:3rem 2rem">
+        <div style="font-size:3rem;margin-bottom:1rem">🗑️</div>
+        <h2 class="form-title mb-0">¿Eliminar este mensaje?</h2>
+        <p class="text-muted mt-1" style="margin-bottom:2rem"><strong>{{ msg.subject }}</strong></p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-actions" style="justify-content:center">
+                <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+                <a href="{% url 'inbox' %}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

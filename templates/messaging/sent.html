@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Mensajes enviados{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="section-header d-flex justify-between align-center">
+        <h1 class="section-title">Mensajes</h1>
+        <a href="{% url 'message_send' %}" class="btn btn-primary">+ Nuevo mensaje</a>
+    </div>
+    <div class="tabs">
+        <a href="{% url 'inbox' %}" class="tab">Recibidos</a>
+        <a href="{% url 'sent_box' %}" class="tab active">Enviados</a>
+    </div>
+    {% if msgs %}
+    <ul class="message-list">
+        {% for msg in msgs %}
+        <li class="message-item">
+            <div>
+                <div class="message-subject"><a href="{% url 'message_detail' msg.pk %}" style="text-decoration:none;color:inherit">{{ msg.subject }}</a></div>
+                <div class="message-meta">Para: {{ msg.receiver.username }} &middot; {{ msg.sent_at|date:"d/m/Y H:i" }}</div>
+            </div>
+            <a href="{% url 'message_detail' msg.pk %}" class="btn btn-secondary btn-sm">Ver</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <div class="empty-state"><div class="icon">📤</div><p>No enviaste mensajes todavía.</p></div>
+    {% endif %}
+</div>
+{% endblock %}

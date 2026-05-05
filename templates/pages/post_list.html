@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}Noticias{% endblock %}
+{% block content %}
+<div class="container-wide">
+    <div class="section-header d-flex justify-between align-center flex-wrap" style="gap:1rem">
+        <div>
+            <h1 class="section-title">Noticias</h1>
+            <p class="section-subtitle">Explorá todos los posts del blog</p>
+        </div>
+        {% if user.is_authenticated %}
+        <a href="{% url 'post_create' %}" class="btn btn-primary">+ Nueva noticia</a>
+        {% endif %}
+    </div>
+
+    <form class="search-form" method="get">
+        <input type="text" name="q" value="{{ query }}" placeholder="Buscar noticias..." class="form-control">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+        {% if query %}<a href="{% url 'post_list' %}" class="btn btn-secondary">Limpiar</a>{% endif %}
+    </form>
+
+    {% if posts %}
+    <div class="card-grid">
+        {% for post in posts %}
+        <div class="card">
+            {% if post.image %}
+                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="card-img">
+            {% else %}
+                <div class="card-img-placeholder">📝</div>
+            {% endif %}
+            <div class="card-body">
+                <h3 class="card-title">{{ post.title }}</h3>
+                <p class="card-subtitle">{{ post.subtitle }}</p>
+                <p class="card-meta">{{ post.created_at }} · por {{ post.author.username }}</p>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'post_detail' post.pk %}" class="btn btn-secondary btn-sm">Leer más</a>
+                {% if user.is_authenticated %}
+                <div class="d-flex gap-1">
+                    <a href="{% url 'post_update' post.pk %}" class="btn btn-secondary btn-sm">✏ Editar</a>
+                    <a href="{% url 'post_delete' post.pk %}" class="btn btn-danger btn-sm">🗑</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% elif query %}
+    <div class="empty-state">
+        <div class="icon">🔍</div>
+        <p>No se encontraron noticias para "<strong>{{ query }}</strong>".</p>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="icon">📭</div>
+        <p>No hay noticias aún.</p>
+        {% if user.is_authenticated %}
+        <a href="{% url 'post_create' %}" class="btn btn-primary mt-2">Crear la primera noticia</a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

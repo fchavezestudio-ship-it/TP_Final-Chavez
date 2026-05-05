@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Enviar mensaje{% endblock %}
+{% block content %}
+<div class="container">
+<div class="form-card" style="max-width:600px">
+    <h1 class="form-title">Nuevo mensaje</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            <label>{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}<ul class="errorlist">{% for e in field.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+        </div>
+        {% endfor %}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+            <a href="{% url 'inbox' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+</div>
+{% endblock %}

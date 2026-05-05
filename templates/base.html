@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mi Blog{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+<nav>
+    <a href="{% url 'home' %}" class="nav-brand">Las Peque Noticias</a>
+    <ul class="nav-links">
+        <li><a href="{% url 'home' %}">Inicio</a></li>
+        <li><a href="{% url 'about' %}">Acerca de mí</a></li>
+        <li><a href="{% url 'post_list' %}">Todas las noticias</a></li>
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'inbox' %}">
+                Mensajes
+            </a></li>
+            <li><a href="{% url 'profile' %}">{{ user.username }}</a></li>
+            <li><a href="{% url 'logout' %}" class="btn-nav">Salir</a></li>
+        {% else %}
+            <li><a href="{% url 'login' %}">Ingresar</a></li>
+            <li><a href="{% url 'register' %}" class="btn-nav">Registrarse</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
+{% if messages %}
+<div class="alert-container">
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% block content %}{% endblock %}
+
+<footer>
+    <p>&copy; {% now "Y" %} - De Coderhouse para el mundo</p>
+</footer>
+
+{% block extra_scripts %}{% endblock %}
+</body>
+</html>

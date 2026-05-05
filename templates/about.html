@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Acerca de mí{% endblock %}
+
+{% block content %}
+<div class="about-hero">
+    <h1 style="font-family:'Playfair Display',serif;font-size:2.5rem;margin-bottom:.5rem">Acerca de mí</h1>
+    <p style="color:#aaa;max-width:500px;margin:0 auto">Conocé un poco más sobre el alumno que realizó este proyecto</p>
+</div>
+
+<div class="about-content">
+    <h2>¡Hola! 👋</h2>
+    <p>Soy Facundo Carlos Chavez Guleac, pero todo el mundo me llama Peque, soy un estudiante de Coderhouse y este es mi trabajo final.</p>
+
+    <h2>¿De qué trata este blog?</h2>
+    <p>Este es un blog creado como trabajo final para el curso de Python en Coderhouse. En esta plataforma se pueden crear usuarios y publicar noticias.</p>
+
+    <h2>¿De donde sos?</h2>
+    <p>Soy de Bahia Blanca, Provincia de Buenos Aires.</p>
+
+    <h2>¿A qué te dedicas?</h2>
+    <p>Soy estudiante de Coderhouse y estoy especializándome en Python. Además, estoy realizando la tesis sobre Licenciatura en Administracion y a la vez trabajo en un estudio contable.</p>
+
+    <h2>¿Cuales son tus hobbies?</h2>
+    <p>En mi tiempo libre me gusta leer, jugar al hockey y aprender algo nuevo todos los dias.</p>
+
+    <h2>¿Por qué te inscribiste al curso?</h2>
+    <p>Me inscribí al curso de Coderhouse porque me interesa aprender mas sobre la programacion y en un futuro poder crear un sistema de gestion para el estudio contable.</p>
+
+    <h2>¿Recomendarías el curso?</h2>
+    <p>Definitivamente lo recomendaría a cualquier persona interesada en aprender Python y desarrollo web.</p>
+
+    <h2>Agradecimientos</h2>
+    <p>Quiero agradecer a Nicolas Dziuma y a Gabriela Edith Rossi que fueron grandes profesores durante el curso. Tambien quiero agradecer a mi mejor amigo Mateo Corbalan por motivarme a seguir aprendiendo.</p>
+
+    {% if user.is_authenticated %}
+    <a href="{% url 'message_send' %}" class="btn btn-primary">Enviarme un mensaje</a>
+    {% else %}
+    <a href="{% url 'register' %}" class="btn btn-primary">Registrate para escribirme</a>
+    {% endif %}
+</div>
+{% endblock %}

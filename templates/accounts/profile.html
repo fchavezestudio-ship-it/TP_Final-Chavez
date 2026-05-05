@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Mi Perfil{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="section-header">
+        <h1 class="section-title">Mi Perfil</h1>
+    </div>
+    <div class="profile-card">
+        {% if profile.avatar %}
+            <img src="{{ profile.avatar.url }}" alt="Avatar" class="avatar">
+        {% else %}
+            <div class="avatar-placeholder">👤</div>
+        {% endif %}
+        <div class="profile-info">
+            <h2>{{ user.get_full_name|default:user.username }}</h2>
+            <p class="role">@{{ user.username }}</p>
+            <p class="profile-detail"><strong>Email:</strong> {{ user.email|default:"No especificado" }}</p>
+            {% if profile.birth_date %}<p class="profile-detail"><strong>Nacimiento:</strong> {{ profile.birth_date }}</p>{% endif %}
+            {% if profile.bio %}<p class="profile-detail" style="margin-top:.5rem">{{ profile.bio }}</p>{% endif %}
+            <div class="profile-actions">
+                <a href="{% url 'profile_edit' %}" class="btn btn-secondary btn-sm">✏ Editar perfil</a>
+                <a href="{% url 'change_password' %}" class="btn btn-secondary btn-sm">🔒 Cambiar contraseña</a>
+                <a href="{% url 'message_send' %}" class="btn btn-secondary btn-sm">✉ Mensajes</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

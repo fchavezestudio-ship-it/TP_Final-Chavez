@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio — Las Peque Noticias{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>Bienvenido a<br><em>el noticiero mas importante de todo Coderhouse</em></h1>
+    <p>Manenete informado sobre las últimas noticias sobre la programacion.</p>
+    <a href="{% url 'post_list' %}" class="btn btn-primary">Ver todos las noticias</a>
+</div>
+
+<div class="container-wide">
+    {% if recent_posts %}
+    <div class="section-header">
+        <h2 class="section-title">Noticias recientes</h2>
+        <p class="section-subtitle">Las últimas noticias publicadas en el blog</p>
+    </div>
+    <div class="card-grid">
+        {% for post in recent_posts %}
+        <div class="card">
+            {% if post.image %}
+                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="card-img">
+            {% else %}
+                <div class="card-img-placeholder">📝</div>
+            {% endif %}
+            <div class="card-body">
+                <h3 class="card-title">{{ post.title }}</h3>
+                <p class="card-subtitle">{{ post.subtitle }}</p>
+                <p class="card-meta">{{ post.created_at }} · {{ post.author.username }}</p>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'post_detail' post.pk %}" class="btn btn-secondary btn-sm">Leer más</a>
+                {% if user.is_authenticated %}
+                <div class="d-flex gap-1">
+                    <a href="{% url 'post_update' post.pk %}" class="btn btn-secondary btn-sm">✏</a>
+                    <a href="{% url 'post_delete' post.pk %}" class="btn btn-secondary btn-sm">🗑</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="text-center mt-3">
+        <a href="{% url 'post_list' %}" class="btn btn-secondary">Ver todos →</a>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="icon">📭</div>
+        <p>No hay noticias publicadas todavía.</p>
+        {% if user.is_authenticated %}
+        <a href="{% url 'post_create' %}" class="btn btn-primary mt-2">Crear la primera noticia</a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
