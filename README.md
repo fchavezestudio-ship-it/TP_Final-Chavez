@@ -1,4 +1,4 @@
-# Las peque noticias — Proyecto Final Django
+# Las peque noticias — Proyecto Final Python
 
 Aplicación web tipo blog desarrollada con Python/Django.
 
