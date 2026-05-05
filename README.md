@@ -34,6 +34,8 @@ Aplicación web tipo blog desarrollada con Python/Django.
 ```bash
 git clone <repo-url>
 cd TP_Final-Chavez
+python -m venv venv
+venv\Scripts\activate
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py createsuperuser
